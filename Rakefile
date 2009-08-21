@@ -11,7 +11,6 @@ begin
     gem.homepage = "http://github.com/erikhansson/emailer"
     gem.authors = ["Erik Hansson"]
     gem.add_development_dependency "rspec", ">= 1.2.4"
-    gem.add_dependency "tmail", ">= 1.2"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError
