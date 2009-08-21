@@ -5,12 +5,13 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "emailer"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{A really simple way to send emails...}
+    gem.description = %Q{}
     gem.email = "erik@bits2life.com"
     gem.homepage = "http://github.com/erikhansson/emailer"
     gem.authors = ["Erik Hansson"]
-    gem.add_development_dependency "rspec"
+    gem.add_development_dependency "rspec", ">= 1.2.4"
+    gem.add_dependency "tmail", ">= 1.2"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError

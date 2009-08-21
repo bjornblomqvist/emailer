@@ -1,6 +1,38 @@
 = emailer
 
-Description goes here.
+Emailer is a collection of utility classes for sending emails
+using an existing SMTP service. I personally only use it with
+AuthSMTP, and it's not been extensively tested. Use at your 
+own risk.
+
+I apologize in advance for the lack of documentation. There is
+little going on in the code, and the interface should be easy
+enough for anyone to figure out with a minute to glance at the
+code. Here's a taste:
+
+== Basic use
+
+  smtp = Emailer::AuthsmtpFacade.new :username => '[username]', :pasword => '[password]', :domain => 'localhost'
+  smtp.open do
+    smtp.send_text(
+        :from => 'your@email.com',
+        :to => 'to@email.com',
+        :subject => 'Thanks',
+        :body => 'Mail body.'
+      )
+  end
+
+== Bulk messages
+
+  queue = Emailer::MailQueue.new smtp
+  queue.add(
+      :from => 'your@email.com',
+      :to => 'to@email.com',
+      :subject => 'Thanks',
+      :body => 'Mail body.'
+    ) { |success, mail| puts "Sent mail to #{mail[:to]}..." }
+  queue.process
+
 
 == Note on Patches/Pull Requests
  
@@ -10,7 +42,7 @@ Description goes here.
   future version unintentionally.
 * Commit, do not mess with rakefile, version, or history.
   (if you want to have your own version, that is fine but
-   bump version in a commit by itself I can ignore when I pull)
+  bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
 == Copyright
