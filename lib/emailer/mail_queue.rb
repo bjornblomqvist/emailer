@@ -22,7 +22,7 @@ module Emailer
     end
     
     def add_html(mail, &callback)
-      add({ :content_type => 'text/html' }.merge(mail))
+      add({ :content_type => 'text/html' }.merge(mail), &callback)
     end
     
     def last

@@ -79,7 +79,7 @@ module Emailer
     end
     
     def close_connection
-      @connection.finish if @connection
+      @connection.finish if @connection && @connection.started?
       @connection = @open = nil
     end
     
