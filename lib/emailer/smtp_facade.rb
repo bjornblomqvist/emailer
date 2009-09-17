@@ -7,6 +7,9 @@ module Emailer
   class ConnectionNotOpenError < MailerError; end
   
   class SmtpFacade
+    
+    class << self; attr_accessor :default end
+    
     attr_reader :settings, :error, :offending_mail
     
     def initialize(settings)

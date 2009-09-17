@@ -153,6 +153,14 @@ module Emailer
         end
       end
       
+      describe :default do
+        it "should contain a global default emailer" do
+          v = MockSmtpFacade.new
+          Emailer::SmtpFacade.default = v
+          Emailer::SmtpFacade.default.should == v
+        end
+      end
+      
     end
   end
 end

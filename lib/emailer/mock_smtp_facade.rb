@@ -4,10 +4,11 @@ module Emailer
     def start(*args); end
     def sendmail(*args); end
     def finish; end
+    def started?; end
   end
   
   class MockSmtpFacade < SmtpFacade
-    
+  
     attr_reader :sent
     
     def initialize(settings = {})
