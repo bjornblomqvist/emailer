@@ -15,7 +15,7 @@ module Emailer
     def initialize(settings)
       @settings = settings
       @settings.keys.each do |key|
-        raise ArgumentError unless [
+        raise ArgumentError.new("invalid option, {"+key.to_s+" => "+@settings[key].to_s+"}") unless [
             :host, :port, :username, :password, :authentication, :domain
           ].include?(key)
       end
