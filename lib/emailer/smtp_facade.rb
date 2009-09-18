@@ -24,7 +24,7 @@ module Emailer
     def open
       @open = true
       open_connection
-      yield
+      yield self
     ensure
       @open = false
       close_connection
