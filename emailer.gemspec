@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{emailer}
-  s.version = "0.1.4"
+  s.version = "0.1.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Erik Hansson", "Bjorn Blomqvist"]
-  s.date = %q{2009-09-17}
+  s.date = %q{2009-09-18}
   s.description = %q{}
   s.email = %q{erik@bits2life.com}
   s.extra_rdoc_files = [
@@ -26,11 +26,13 @@ Gem::Specification.new do |s|
      "emailer.gemspec",
      "lib/emailer.rb",
      "lib/emailer/authsmtp_facade.rb",
+     "lib/emailer/logger_smtp_facade.rb",
      "lib/emailer/mail_queue.rb",
      "lib/emailer/mock_smtp_facade.rb",
      "lib/emailer/smtp_facade.rb",
      "lib/emailer/string_utilities.rb",
      "spec/emailer/authsmtp_facade_spec.rb",
+     "spec/emailer/logger_smtp_facade_spec.rb",
      "spec/emailer/mail_queue_spec.rb",
      "spec/emailer/mock_smtp_facade_spec.rb",
      "spec/emailer/smtp_facade_spec.rb",
@@ -44,6 +46,7 @@ Gem::Specification.new do |s|
   s.summary = %q{A really simple way to send emails...}
   s.test_files = [
     "spec/emailer/authsmtp_facade_spec.rb",
+     "spec/emailer/logger_smtp_facade_spec.rb",
      "spec/emailer/mail_queue_spec.rb",
      "spec/emailer/mock_smtp_facade_spec.rb",
      "spec/emailer/smtp_facade_spec.rb",
