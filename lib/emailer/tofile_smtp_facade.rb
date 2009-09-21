@@ -9,6 +9,7 @@ module Emailer
         [:file_dir, :use].include? key
       end
       raise ArgumentError.new(":log_file location is missing") unless @tofile_settings[:file_dir]
+      @tofile_settings[:file_dir] = @tofile_settings[:file_dir].to_s
       settings.clear
       super
     end
