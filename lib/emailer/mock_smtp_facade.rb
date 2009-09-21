@@ -12,7 +12,7 @@ module Emailer
     attr_reader :sent
     
     def initialize(settings = {})
-      @sent = []
+      @sent = {}
       super
     end
     
@@ -24,7 +24,7 @@ module Emailer
     # And save, don't send, mail...
     def send_mail(options)
       raise ConnectionNotOpenError unless @open
-      @sent << options
+      @sent[UUID.new.to_s] << options
       true
     rescue ConnectionNotOpenError => e
       raise e
@@ -34,5 +34,29 @@ module Emailer
       false
     end
     
+    
+    
+    def get_url_for uuidString
+      return "/getemail/"+uuidString
+    end
+    
+    def call(env)
+      if  env["PATH_INFO"].index("/getemail/")
+
+        uuid = env["PATH_INFO"].sub("/getemail/".length)
+        
+        return [200, {"Content-Type" => "text/plain"},['Emailer::SmtpFacade.default is not a MockSmtpFacade']] unless
+          Emailer::SmtpFacade.default && Emailer::SmtpFacade.default.instance_of? Emailer::MockSmtpFacade 
+        
+        return [200, {"Content-Type" => "text/plain"},['No email sent']] if Emailer::SmtpFacade.default.sent.count == 0
+        
+        return [200, {"Content-Type" => "text/html"}, [Emailer::SmtpFacade.default.sent[uuid][:body].to_s]]
+      else
+        @app.call env
+      end
+    end
+    
   end
 end
+
+
