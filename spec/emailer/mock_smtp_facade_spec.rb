@@ -19,7 +19,8 @@ module Emailer
           )
         end
         
-        smtp.sent.first.should == message
+        smtp.last_email_sent.should == message
+        
       end
     end
     

@@ -38,6 +38,17 @@ code. Here's a taste:
     ) { |success, mail| puts "Sent mail to #{mail[:to]}..." }
   queue.process
 
+== Testing using webrat
+
+  Add middleware to render emails for webrat
+
+    Emailer::SmtpFacade.default = Emailer:MockSmtpFacade.new
+    config.middleware.use "Emailer::MockSmtpFacade"
+  
+  Then you can get the url to the last email sent using
+  
+    Emailer::SmtpFacade.default.last_email_sent_url
+
 == Note on Patches/Pull Requests
  
 * Fork the project.

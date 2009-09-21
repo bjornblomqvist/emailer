@@ -1,3 +1,5 @@
+require 'uuid'
+
 module Emailer
   
   class MockNetSmtp
@@ -24,17 +26,27 @@ module Emailer
     # And save, don't send, mail...
     def send_mail(options)
       raise ConnectionNotOpenError unless @open
-      @sent[UUID.new.to_s] << options
+      @sent[UUID.new.generate] = options
       true
     rescue ConnectionNotOpenError => e
       raise e
     rescue StandardError => e
       @error = e
-      @offending_mail = mail
+      @offending_mail = options
       false
     end
     
+    def last_email_sent
+      @sent[@sent.keys.last.to_s]
+    end
     
+    def last_email_sent_key
+      @sent.keys.last
+    end
+    
+    def last_email_sent_url
+      get_url_for last_email_sent_key
+    end
     
     def get_url_for uuidString
       return "/getemail/"+uuidString
@@ -46,7 +58,7 @@ module Emailer
         uuid = env["PATH_INFO"].sub("/getemail/".length)
         
         return [200, {"Content-Type" => "text/plain"},['Emailer::SmtpFacade.default is not a MockSmtpFacade']] unless
-          Emailer::SmtpFacade.default && Emailer::SmtpFacade.default.instance_of? Emailer::MockSmtpFacade 
+          Emailer::SmtpFacade.default.instance_of? Emailer::MockSmtpFacade 
         
         return [200, {"Content-Type" => "text/plain"},['No email sent']] if Emailer::SmtpFacade.default.sent.count == 0
         
