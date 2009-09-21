@@ -42,8 +42,8 @@ code. Here's a taste:
 
   Add middleware to render emails for webrat
 
-    Emailer::SmtpFacade.default = Emailer:MockSmtpFacade.new
-    config.middleware.use "Emailer::MockSmtpFacade"
+    Emailer::SmtpFacade.default = Emailer::MockSmtpFacade.new
+    config.middleware.use "Emailer::TestingMiddleware"
   
   Then you can get the url to the last email sent using
   

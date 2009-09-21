@@ -51,6 +51,9 @@ module Emailer
     def get_url_for uuidString
       return "/getemail/"+uuidString
     end
+  end
+  
+  class TestingMiddleware
     
     def call(env)
       if  env["PATH_INFO"].index("/getemail/")
