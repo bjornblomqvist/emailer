@@ -70,26 +70,6 @@ module Emailer
           
       end
     end
-    
-    
-    describe :last_email_sent_url do
-      it 'Should return url to last email sent' do
-          smtp = LoggerSmtpFacade.new :log_file => TEST_LOG_FILE
-
-          email = { 
-            :to => "test@bits2life.com",
-            :from => "test2@bits2life.com",
-            :subject => "This is a test 4",
-            :body => "Test body"
-          }
-
-          smtp.open do
-            smtp.send_mail email
-          end
-
-          smtp.last_email_sent_url.should == "/getemail/"+smtp.sent.keys.last
-      end
-    end
       
     
 

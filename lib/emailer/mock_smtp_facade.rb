@@ -49,33 +49,10 @@ module Emailer
     end
     
     def get_url_for uuidString
-      return "/getemail/"+uuidString
+       TestingMiddleware.testing_path+uuidString
     end
   end
   
-  class TestingMiddleware
-    
-    def initialize(app)
-      @app = app
-    end
-    
-    def call(env)
-      if  env["PATH_INFO"].index("/getemail/")
-
-        uuid = env["PATH_INFO"].sub("/getemail/".length)
-        
-        return [200, {"Content-Type" => "text/plain"},['Emailer::SmtpFacade.default is not a MockSmtpFacade']] unless
-          Emailer::SmtpFacade.default.instance_of? Emailer::MockSmtpFacade 
-        
-        return [200, {"Content-Type" => "text/plain"},['No email sent']] if Emailer::SmtpFacade.default.sent.count == 0
-        
-        return [200, {"Content-Type" => "text/html"}, [Emailer::SmtpFacade.default.sent[uuid][:body].to_s]]
-      else
-        @app.call env
-      end
-    end
-    
-  end
 end
 
 

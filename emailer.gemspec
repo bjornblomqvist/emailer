@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{emailer}
-  s.version = "0.1.13"
+  s.version = "0.1.14"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Erik Hansson", "Bjorn Blomqvist"]
@@ -53,6 +53,7 @@ Gem::Specification.new do |s|
      "spec/emailer/mail_queue_spec.rb",
      "spec/emailer/mock_smtp_facade_spec.rb",
      "spec/emailer/smtp_facade_spec.rb",
+     "spec/emailer/testing_middlerware_spec.rb",
      "spec/emailer/tofile_smtp_facade_spec.rb",
      "spec/spec_helper.rb"
   ]
