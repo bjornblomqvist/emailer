@@ -55,6 +55,10 @@ module Emailer
   
   class TestingMiddleware
     
+    def initialize(app)
+      @app = app
+    end
+    
     def call(env)
       if  env["PATH_INFO"].index("/getemail/")
 
